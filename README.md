@@ -28,6 +28,7 @@
 - avoiding "Escaping references"
 
   - wrapping up returned collections in Collections.unmodifiable..
+  - casting object to readonly base classes or interfaces 
 
 - literal Strings are put onto the poll
 
