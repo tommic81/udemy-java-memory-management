@@ -5,6 +5,9 @@
 - Visual VM - c:\Program Files\Java\jdk1.8.0_102\bin\
 - [Memory Analyzer](https://www.eclipse.org/mat/)
 - [java tools](https://docs.oracle.com/javase/8/docs/technotes/tools/unix/java.html)
+- [GC collectors](https://docs.oracle.com/javase/8/docs/technotes/guides/vm/gctuning/collectors.html)
+- http://localhost:8080/mywebapp/displayAllTutors.html
+- /tmp/visualvm.dat/localhost_22130/heapdump-1510609626621.hprof
 
 #### Notes and Commands
 
@@ -131,7 +134,7 @@
 
 - Types of collector
 
-  - Serial - one thead, good for small applications `-XX:+UseSerialGC`
+  - Serial - one thread, good for small applications `-XX:+UseSerialGC`
 
   - Paraller - gc on young generation in parallel, multi threads, good for large data sets
 
@@ -142,5 +145,11 @@
     `-XX:+UseG1GC`
 
   - `-XX:+PrintCommandLineFlags` - to find out which collector is used
+
+- Garbage collection and generation sizes
+
+  - `-verbose:gc` - print to the console when a garbage collection takes place
+  - `-Xmn` - set the size of the young generation
+  - `-XX:HeapDumpOnOutOfMemory` - creates a heap dump file
 
 #### Instructions
