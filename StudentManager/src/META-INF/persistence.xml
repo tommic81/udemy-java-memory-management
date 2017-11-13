@@ -1,0 +1,8 @@
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="1.0">
+
+  <persistence-unit name="tutorManagement" transaction-type="RESOURCE_LOCAL">
+  	<!--  nothing needed here as spring is managing all these properties -->
+  	  <mapping-file>META-INF/queries.xml</mapping-file> 
+  </persistence-unit>
+
+</persistence>

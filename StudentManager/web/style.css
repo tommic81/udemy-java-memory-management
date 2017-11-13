@@ -1,0 +1,75 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: Helvetica, sans-serif;
+	margin: 40px;
+}
+
+p {
+	font-size: 1.1em;
+	margin-bottom: 15px;
+}
+
+h1 {
+	font-size: 1.7em;
+	margin-bottom:30px;
+	border-bottom: 1px solid black;
+}
+
+h2 {
+	font-size: 1.1em;
+	font-style: italic;
+}
+
+input {
+	padding: 5px;
+	width: 480px;
+	font-family: Helvetica, sans-serif;
+	font-size: 1.3em;
+	margin: 0px 0px 10px 0px;
+	border: 1px solid #ccc;
+}
+
+input:focus {
+	border: 2px solid #fff;
+}
+
+.button {
+	width: 200px;
+	margin-left: 130px;
+}
+
+label {
+	float: left;
+	text-align: right;
+	margin-right: 30px;
+	width: 100px;
+	padding-top: 5px;
+	font-size: 1.4em;
+}
+
+table td {
+	color: #669;
+	padding: 10px 8px 0;
+} 
+
+table th {
+	font-size: 1.4em
+	font-weight: bold;
+	color: #040;
+	border-bottom: 2px solid #7070B0;
+	padding: 10px 8px;
+}
+
+#footer {
+	margin-top: 75px;
+	border-top: 1px solid black;
+}
+
+#footer p {
+	font-size: 1.0em;
+	color: gray;
+}

@@ -1,0 +1,90 @@
+<project name="VPPBuild" default="BuildAll">
+    
+    <property name="bin" value="./bin"/>
+    <property name="lib" value="./lib"/>
+    <property name="src" value="./src"/> 
+    <property name="dist" value="./dist"/>
+	
+    <property name="warfile" value="${dist}/mywebapp.war"/>
+    <property name="html" value="./web"/>
+	
+    <!--property name="tomcat.webapps.dir" value="../tomcat/webapps"/-->	    
+	 <property name="tomcat.webapps.dir" value="/opt/apache-tomcat-8.5.23/webapps"/>	 
+
+
+    <path id="my.classpath">
+        <pathelement path="${java.class.path}"/>
+        <pathelement location="${bin}"/>
+        
+        <fileset dir="${lib}">
+            <include name="*.jar"/>
+        </fileset>
+        
+    </path>	 	
+	
+    <target name="BuildAll"
+            depends="clean, prep, compile, war, deploy"
+            description=
+            "Complete rebuild.">
+        <echo message="Build complete."/>
+    </target>
+    
+    <target name="clean">
+        <delete dir="${bin}"/>
+        <delete dir="${dist}"/>
+    </target>
+    
+    <target name="prep">        
+        <mkdir dir="${bin}"/>
+        <mkdir dir="${dist}"/>
+    </target>
+            
+    <target name="compile"
+     description="Compile all Java classes"
+    	depends="prep">
+        
+        <javac srcdir="${src}" destdir="${bin}" debug="true" encoding="ISO-8859-1">
+            <classpath refid="my.classpath"/>
+        </javac>
+    	
+    	<!-- pick up the persistence.xml file and get it under the classes directory -->
+    	<copy todir="${bin}">
+    		<fileset dir="${src}">
+    			<include name="**/*.xml"/>
+    			<include name="*.properties"/>
+    		</fileset>
+       	</copy>
+        
+        <echo message="Compiled."/>
+    </target>
+
+    <target name="war" depends="compile" 
+	                         description="Build WAR file.">
+	   <delete file="${warfile}"/>
+		
+	   <war destfile="${warfile}" webxml="web.xml">
+	      <classes dir="${bin}"/>
+  	   	  <lib dir="${lib}">
+  	   	  	<include name="**/*.jar"/>
+  	   	    <exclude name="servlet-api.jar"/>
+  	   	  </lib>
+
+	   	  <webinf dir=".">
+	   	  	<filename name="*.*"/>
+	   	  </webinf>
+	   	
+	   	  <!-- added for spring-mvc -->
+	   	  <webinf dir="${src}">
+	   		 <filename name="*.xml"/>
+	   	  </webinf>
+
+		  <fileset dir="${html}"/> <!-- html/jsp files -->
+	   </war>
+	</target>
+
+	<target name="deploy" depends="war"
+	     description="Deploy web application.">
+	     <copy file="${warfile}" todir="${tomcat.webapps.dir}"/>
+	</target>
+
+</project>

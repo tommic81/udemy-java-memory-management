@@ -1,0 +1,24 @@
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm
+    http://java.sun.com/xml/ns/persistence/orm_2_0.xsd"
+    version="2.0">
+
+
+	<named-query name="allTutors">
+		<query>select tutor from Tutor as tutor</query>
+	</named-query>	
+
+	<named-query name="totalSalary">
+		<query>select sum (tutor.salary) from Tutor as tutor</query>
+	</named-query>	
+
+	<named-query name="tutorByIdWithEagerFetchOfStudents">
+		<query>select tutor from Tutor as tutor left join fetch tutor.supervisionGroup where tutor.id = :id</query>
+	</named-query>	
+
+	<named-query name="tutorByIdLazy">
+		<query>select tutor from Tutor as tutor where tutor.id = :id</query>
+	</named-query>	
+
+</entity-mappings>

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+	<query name="allTutors">select tutor from Tutor as tutor</query>
+
+	<query name="totalSalary">select sum (tutor.salary) from Tutor as tutor</query>
+
+	<query name="tutorByIdWithEagerFetchOfStudents">select tutor from Tutor as tutor left join fetch tutor.supervisionGroup where tutor.id = :id</query>
+
+</hibernate-mapping>
