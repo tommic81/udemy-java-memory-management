@@ -6,8 +6,7 @@
 - [Memory Analyzer](https://www.eclipse.org/mat/)
 - [java tools](https://docs.oracle.com/javase/8/docs/technotes/tools/unix/java.html)
 - [GC collectors](https://docs.oracle.com/javase/8/docs/technotes/guides/vm/gctuning/collectors.html)
-- http://localhost:8080/mywebapp/displayAllTutors.html
-- /tmp/visualvm.dat/localhost_22130/heapdump-1510609626621.hprof
+- [local webapp url ](http://localhost:8080/mywebapp/displayAllTutors.html)
 
 #### Notes and Commands
 
@@ -152,4 +151,47 @@
   - `-Xmn` - set the size of the young generation
   - `-XX:HeapDumpOnOutOfMemory` - creates a heap dump file
 
+- Weak references - value may or may not survive gc even if there exists a rerefence
+
+- Soft references  - even if the object is eligable for gc it will destroyed only when memory is needed
+
+  ```java
+  WeakReference<Book> myBook = book1;
+  SoftReference<Book> myBook = book2
+  ```
+
+- Weak and soft references can be used in different caching scenarios 
+
+- WeakHashMap<K,V> - there is a strong reference to a map, but terea are weak references between keys and values. Key and values can be removed during gc.
+
+  ```java
+  Map<Book, BookImage> imageCache = WeakHashMap<Book, BookImage>()
+  ```
+
 #### Instructions
+
+###### Find memory leaks
+
+1. Run tomcat server with limited Xmx and Xms
+
+   - create setenv.sh (setenv.bat) in tomcat/bin
+
+   ```sh
+   #! /bin/sh
+   export CATALINA_OPTS="$CATALINA_OPTS -Xmx1024m"
+   export CATALINA_OPTS="$CATALINA_OPTS -Xms512m"
+   ```
+
+2. Deploy your application
+
+3. Run JVisual VM (install Visual GC plugin)
+
+4. Execute some actions with your app ie. using jMeter
+
+5. Observe problems on Visual GC tab
+
+6. Export the Heap dump (Monitor tab)
+
+7. Run Memory Analyzer and pass your dump
+
+8. Find problematic code in a report (tree) 
